@@ -1,0 +1,57 @@
+#include <iostream>
+#include <windows.h>
+using namespace std;
+
+
+void draw(int tower1[], int tower2[], int tower3[], int size) {
+	system("cls");
+	for (int i = 0; i < size; ++i) {
+		cout << "| " << tower1[i] << " |  | " << tower2[i] << " |  | " << tower3[i] << " |" << endl;
+	}
+}
+
+void builder(int tower1[], int tower2[], int tower3[], int size) {
+	for (int i = 0; i < size; ++i) {
+		tower1[i] = i + 1;
+		tower2[i] = 0;
+		tower3[i] = 0;
+	}
+	cout << size;
+}
+
+void shuffler(int tower1[], int tower2[], int tower3[], int n, int real_size) {
+	if (n > 0) {
+		shuffler(tower1, tower3, tower2, n - 1, real_size);
+		int ind1 = 0;
+		while (tower1[ind1] == 0 && ind1 < real_size - 1) {
+			++ind1;
+		}
+		int ind2 = real_size - 1;
+		while (tower2[ind2] != 0 && ind2 > 0) {
+			--ind2;
+		}
+		tower2[ind2] = tower1[ind1];
+		tower1[ind1] = 0;
+		draw(tower1, tower2, tower3, real_size);
+		Sleep(1000);
+		shuffler(tower3, tower2, tower1, n - 1, real_size);
+		Sleep(1000);
+	}
+}
+
+int main() {
+
+	int num;
+	cin >> num;
+	int* tower1 = new int[num];
+	int* tower2 = new int[num];
+	int* tower3 = new int[num];
+	builder(tower1, tower2, tower3, num);
+	draw(tower1, tower2, tower3, num);
+	shuffler(tower1, tower2, tower3, num, num);
+	delete[] tower1;
+	delete[] tower2;
+	delete[] tower3;
+	system("pause");
+	return 0;
+}
