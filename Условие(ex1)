@@ -1,0 +1,65 @@
+Вы пишете расширенную версию программы Zolushka. 
+
+Система имела большой успех и вскоре пользователи сказали, что им нужен функционал, который позволял бы записывать значения идеальной температуры и чистоты как режим с определенным названием. Чтобы после можно было выбирать из нескольких режимов. Таким образом функционал системы Zolushka теперь должен работать следующим образом:
+
+Пользователь может задать от 0 до 3 режимов для умного дома. Для этого он:
+Вводит число режимов (целое число от 0 до 3).
+Создает новые режимы с помощью команды ADD name t c, где name – название режима, t – температура, которая считается идеальной при включении этого режима (целое число от -50 до 50), и c – чистота, которая считается идеальной при включении этого режима (целое в диапазоне от 0 до 100).
+Один раз задаются идеальные значения температуры и чистоты в доме, для этого используются следующие команды:
+Либо SET TEMP t, SET CLEANLINESS c, где t – целое число от -50 до 50, а c – целое в диапазоне от 0 до 100.
+Либо SET name, где name – название режима, в соответствии с которым задаются значения идеальной температуры и чистоты.
+Далее каждый три часа датчики считывают текущее значение температуры и чистоты и передают в главную программу Zolushka в виде команд GET TEMP t, GET CLEANLINESS c, где t – целое число от -50 до 50, а c – целое в диапазоне от 0 до 100.
+После получения команды, Zolushka запускает кондиционер на охлаждение или нагрев, если температура не соответствует идеальной.
+После получения команды, Zolushka запускает робот-пылесос, если уровень чистоты ниже идеального.
+В конце дня хозяин дома может узнать статистику за день, используя от 0 до 3 команд:
+STATISTICS HOME – выводит сообщение вида "Zolushka used cleaner X times, used air conditioning Y times", где X – то, сколько раз включался пылесос, а Y – то, сколько раз включался кондиционер.
+STATISTICS AIR – выводит сообщение вида "Zolushka summary increase temperature for N degrees today, summary decrease temperature for M degrees today", где N – на сколько суммарно была повышена температура за день, а M – на сколько понижена. Оба числа выводятся с точностью до одного знака после запятой.
+STATISTICS CLEANER – выводит сообщение вида "Zolushka raised cleanliness today for Z points", где Z – то, насколько суммарно был повышен уровень чистоты за день.
+Формат входных данных
+Количество режимов (целое число от 0 до 3).
+
+Команды – установка режимов.
+
+Команды – установка идеальной температуры и чистоты.
+
+Сколько часов работа система (целое число от 0 до 23). Считаем, что отсчет идет с последнего запуска, то есть система запускается раз в 3 часа, начиная с третьего часа.
+
+Команды – данные датчиков.
+
+Сколько видов статистики хочет посмотреть хозяин дома (целое число от 0 до 3).
+
+Команды – запрос на статистику.
+
+Входные данные           Выходные данный
+
+2
+ADD PERFECT 24 100
+ADD OPTIMA 25 80
+SET OPTIMA
+8
+GET TEMP 19
+GET CLEANLINESS 60
+GET TEMP 26
+GET CLEANLINESS 85
+3
+STATISTICS HOME
+STATISTICS AIR
+STATISTICS CLEANER
+                        Zolushka used cleaner 1 times, used air conditioning 2 times
+                        Zolushka summary increase temperature for 6 degrees today, summary decrease temperature for 1 degrees today
+                        Zolushka raised cleanliness today for 20 points
+0
+SET TEMP 25
+SET CLEANLINESS 80
+8
+GET TEMP 19
+GET CLEANLINESS 60
+GET TEMP 26
+GET CLEANLINESS 85
+3
+STATISTICS HOME
+STATISTICS AIR
+STATISTICS CLEANER
+                        Zolushka used cleaner 1 times, used air conditioning 2 times
+                        Zolushka summary increase temperature for 6 degrees today, summary decrease temperature for 1 degrees today
+                        Zolushka raised cleanliness today for 20 points
